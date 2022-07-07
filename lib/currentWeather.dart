@@ -17,7 +17,21 @@ class _CurrentWeatherState extends State<CurrentWeather> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('My Weather App'),
+        child: FutureBuilder(
+          builder: (BuildContext context, snapshot){
+            if(snapshot != null){
+              Weather? weather = snapshot.data as Weather?;
+                  if(weather == null){
+                    return const Text('error getting weather data');
+                  }else{
+                    return weatherBox(weather);
+                  }
+            }else{
+              return const CircularProgressIndicator();
+            }
+          },
+          future: getCurrentWeather(), //calls the async method to load weather data
+        )
       )
     );
   }
@@ -39,9 +53,9 @@ class _CurrentWeatherState extends State<CurrentWeather> {
 
   Future getCurrentWeather() async {
     Weather weather;
-    String city = 'harare';
+    String city = 'Harare';
     String apiKey = '86b1d41fc2846fb077f5a17ea723805b';
-    var url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?id=$city&appid=$apiKey";
+    var url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?id=$city&appid=$apiKey");
 
     var response = await http.get(url);
 

@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/currentWeather.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(
+      MaterialApp(
+        title: "Weather App",
+        home: MyApp()
+      )
+);
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Weather App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const CurrentWeather(),
+    return Scaffold(
+
     );
   }
 }

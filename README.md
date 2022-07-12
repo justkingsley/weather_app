@@ -14,5 +14,8 @@ add api key
 - add weekly weather predictions
 - change background image based on weather.
 
+## screenshot
+<img src="https://github.com/justkingsley/weather_app/blob/main/screenshots/home_ui.png" width="200">
+
 
  

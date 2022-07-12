@@ -7,8 +7,8 @@ import 'dart:async';
 import 'dart:convert';
 
 Future<WeatherInfo> fetchWeather () async {
-  const city = "Harare";
-  const apiKey = '';
+  const city = "Moscow";
+  const apiKey = "API_KEY";
   const requestUrl = "https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apiKey&units=metric";
 
   final response = await http.get(Uri.parse(requestUrl));
@@ -55,6 +55,7 @@ class WeatherInfo{
 void main() => runApp(
       const MaterialApp(
         title: "Weather App",
+        debugShowCheckedModeBanner: false,
         home: MyApp()
       )
 );
@@ -82,7 +83,7 @@ class _MyApp extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xFFE4DFFD),
+        backgroundColor: const Color(0xFFFFFFFF),
         body: FutureBuilder<WeatherInfo>(
           future: futureWeather,
           builder: (BuildContext context, snapshot) {

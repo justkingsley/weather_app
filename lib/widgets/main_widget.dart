@@ -62,7 +62,7 @@ class MainWidget extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               child: ListView(
                 children: [
-                  WeatherTile(icon: Icons.device_thermostat_outlined, title: 'Temperature', subtitle: '$temp°C'),
+                  WeatherTile(icon: Icons.thermostat_sharp, title: 'Temperature', subtitle: '$temp°C'),
                   WeatherTile(icon: Icons.filter_drama_outlined, title: "Weather", subtitle: '$weather'),
                   WeatherTile(icon: Icons.wb_sunny_outlined, title: 'Humidity', subtitle: '$humidity°C'),
                   WeatherTile(icon: Icons.waves_outlined, title: 'Wind Speed', subtitle: '${windSpeed}kph')

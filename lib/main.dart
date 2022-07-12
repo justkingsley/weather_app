@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weather_app/widgets/main_widget.dart';
 import 'package:http/http.dart' as http;
+import 'dart:async';
 import 'dart:convert';
 
 Future<WeatherInfo> fetchWeather () async {
   const city = "Harare";
-  const apiKey = "1ac56e4f6dba51a2777c9b77cd4a4fd1";
-  const requestUrl = "https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apiKey";
+  const apiKey = '';
+  const requestUrl = "https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apiKey&units=metric";
 
   final response = await http.get(Uri.parse(requestUrl));
 
@@ -41,7 +44,7 @@ class WeatherInfo{
       temp: json['main']['temp'].toString(),
       tempMin: json['main']['temp_min'].toString(),
       tempMax: json['main']['temp_max'].toString(),
-      weather: json['weather']['description'].toString(),
+      weather: json['weather'][0]['description'].toString(),
       humidity: json['main']['humidity'].toString(),
       windSpeed: json['wind']['speed'].toString()
 
@@ -56,15 +59,17 @@ void main() => runApp(
       )
 );
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatefulWidget{
   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  State<MyApp> createState() => _MyAppState();
 
+  @override
+  State<StatefulWidget> createState () {
+    return _MyApp();
+  }
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyApp extends State<MyApp> {
 
   late Future<WeatherInfo> futureWeather;
 
@@ -77,6 +82,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color(0xFFE4DFFD),
         body: FutureBuilder<WeatherInfo>(
           future: futureWeather,
           builder: (BuildContext context, snapshot) {
@@ -96,7 +102,10 @@ class _MyAppState extends State<MyApp> {
               );
             }else{
               return const Center(
-                  child: Text('No posts to display'));
+                  child: SpinKitDualRing(
+                    color: Colors.blue,
+                    size: 50.0,
+                  ),);
             }
           }
         )
